@@ -1,0 +1,37 @@
+# 字体
+font-family = JetBrainsMono Nerd Font
+font-size = 15
+
+# 主题
+theme = TokyoNight
+
+# 光标
+cursor-style = block
+
+# 窗口
+window-padding-x = 10
+window-padding-y = 10
+
+# 透明度
+background-opacity = 0.95
+
+# 滚动缓冲
+scrollback-limit = 10000000
+
+# macOS 推荐
+macos-option-as-alt = true
+
+# 复制即选中
+copy-on-select = true
+
+# 关闭确认
+confirm-close-surface = false
+
+# shell integration
+shell-integration = detect
+
+# 下拉式快捷终端：⌘+` 全局唤出/隐藏（随手记一条命令、不打断当前 zellij）
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+
+# 重开 ghostty 时恢复窗口位置/大小
+window-save-state = always

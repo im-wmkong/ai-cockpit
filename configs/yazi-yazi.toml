@@ -1,0 +1,20 @@
+# ~/.config/yazi/yazi.toml
+# 仅覆盖默认 opener 的"编辑文本"一项：用 VS Code 打开（与 $VISUAL 一致）。
+# 其余行为（图片/视频/音频/归档等）沿用 yazi 内置默认，不在此重复声明。
+# 语法参考 yazi 26.x：run 用 %s 占位选中文件路径，规则用 url/mime 匹配。
+
+[opener]
+edit = [
+  # 用 VS Code 新窗口打开并脱离 yazi 进程（orphan）；%s 由 yazi 做 shell 转义
+  { run = 'code -n %s', orphan = true, desc = "VS Code" },
+  # 兜底：没有 code 时回退到终端编辑器（经 sh 展开 $EDITOR）
+  { run = '${EDITOR:-vi} %s', block = true, desc = "$EDITOR" },
+]
+
+[open]
+prepend_rules = [
+  # 文本/代码类文件回车默认走上面的 edit（VS Code）
+  { mime = "text/*", use = "edit" },
+  # JSON 常被识别为 application/json，单独补一条
+  { url = "*.json", use = "edit" },
+]

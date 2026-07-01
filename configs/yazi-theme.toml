@@ -1,0 +1,6 @@
+# ~/.config/yazi/theme.toml
+# 使用 tokyo-night flavor（由 `ya pkg add BennyOe/tokyo-night` 安装），
+# 与终端整体 Tokyo Night 配色统一。
+[flavor]
+dark = "tokyo-night"
+light = "tokyo-night"

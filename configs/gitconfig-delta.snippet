@@ -1,0 +1,23 @@
+# ============================================================
+# 参考片段：终端驾驶舱只往你的 ~/.gitconfig 追加下面这些键。
+# —— 不替换整份 gitconfig，不动你的 [user]、URL 重写、其它 include。
+#
+# setup.sh 会用 `git config --global` 逐条追加以下内容（无需手动改）。
+# 这里仅供你核对 / 手动追加时参考。
+# ============================================================
+
+[core]
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+# Tokyo Night 配色（增删行/行号）；用 --add 追加，保留你可能已有的其它 [include]
+[include]
+    path = ~/.config/delta/tokyonight.gitconfig
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+    # 语法高亮复用 bat 的 Tokyo Night 主题，整体配色一致
+    syntax-theme = tokyonight_night
+[merge]
+    conflictStyle = zdiff3

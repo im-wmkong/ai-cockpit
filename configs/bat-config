@@ -1,0 +1,6 @@
+# bat 配置 —— 与终端整体 Tokyo Night 配色统一
+# 该主题文件来自 ~/.config/bat/themes/tokyonight_night.tmTheme（需 `bat cache --build`）
+--theme="tokyonight_night"
+
+# 同时影响 delta 语法高亮与 yazi 文件预览的观感
+--style="numbers,changes,header"

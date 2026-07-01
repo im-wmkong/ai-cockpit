@@ -1,0 +1,20 @@
+// ~/.config/zellij/layouts/ai_main.kdl
+// AI 编码驾驶舱 —— 启动 zellij 时的默认布局（config.kdl: default_layout "ai_main"）
+// 临时想要一个干净的单 pane 会话时：zellij --layout default
+layout {
+    // ── AI 主战场（三栏）──────────────────────────────
+    tab name="🤖 AI" focus=true {
+        pane split_direction="vertical" {
+            // 左 70%：AI Agent 主战场，启动你指定的 AI agent
+            // __AI_AGENT__ 会被 setup.sh 替换成你传入的命令（如 claude / aider / opencode）
+            pane size="70%" name="🤖 AI Agent" focus=true command="__AI_AGENT__"
+            // 右 30%：辅助工具列
+            pane size="30%" split_direction="horizontal" {
+                // 右上：yazi 文件树
+                pane size="40%" name="📁 Files" command="yazi"
+                // 右下：lazygit 实时盯 AI 改了哪些文件
+                pane size="60%" name="🌿 Git Diff" command="lazygit"
+            }
+        }
+    }
+}

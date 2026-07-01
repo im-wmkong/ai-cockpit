@@ -1,0 +1,34 @@
+# ============================================================
+# AI Cockpit —— zsh 配置片段
+# setup.sh 会把本片段追加到你的 ~/.zshrc（带幂等标记，重复跑不会重复插入）
+#
+# 不含个人环境的初始化（各类版本管理器 nvm / pyenv / g 与私有工具等）
+# 需要的话请自行安装并配置这些。
+# ============================================================
+
+# ── oh-my-zsh 插件（需先安装 omz 与两个自定义插件，见 setup.sh）──
+# 若你的 ~/.zshrc 已有 plugins=(...)，把 zsh-autosuggestions / zsh-syntax-highlighting 加进去即可。
+# 本片段假设 omz 已在别处 source。
+
+# ── 别名 ──
+alias ll="eza -l"
+alias cat="bat"
+alias ip='ifconfig | grep inet\ | grep -v 127.0.0.1'
+
+# 默认编辑器（yazi opener 也用它）
+export VISUAL="code --wait"
+
+# ── yazi: `y` 包装函数，退出时 cd 到 yazi 最后所在目录 ──
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# ── 工具初始化（放在 oh-my-zsh / zsh-syntax-highlighting 之后）──
+eval "$(starship init zsh)"   # 若未装 starship 可删除此行
+eval "$(atuin init zsh)"      # 接管 Ctrl-R 历史搜索
+eval "$(zoxide init zsh)"     # z 跳转 / zi fzf 交互选目录
