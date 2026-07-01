@@ -42,7 +42,7 @@
 **要求**：macOS + [Homebrew](https://brew.sh)（脚本会检测，没装会提示先装）。
 
 ```bash
-git clone [<this-repo-url>](https://github.com/im-wmkong/ai-cockpit.git)
+git clone https://github.com/im-wmkong/ai-cockpit.git
 cd ai-cockpit
 ./setup.sh <ai-agent-命令>      # 例：./setup.sh claude
 ```
