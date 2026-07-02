@@ -30,8 +30,8 @@ confirm-close-surface = false
 # shell integration
 shell-integration = detect
 
-# 下拉式快捷终端：⌘+` 全局唤出/隐藏（随手记一条命令、不打断当前 zellij）
-keybind = global:cmd+grave_accent=toggle_quick_terminal
+# 下拉式快捷终端：Ctrl+Enter 全局唤出/隐藏（随手记一条命令、不打断当前 zellij）
+keybind = global:control+enter=toggle_quick_terminal
 
 # 重开 ghostty 时恢复窗口位置/大小
 window-save-state = always
