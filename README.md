@@ -49,11 +49,11 @@ cd ai-cockpit
 
 `<ai-agent-命令>` 是**必传参数**——即驾驶舱左栏要启动的 AI agent 命令。项目不内置任何 agent，由你决定：`claude`、`aider`、`opencode` 或任意可执行命令。不确定可以先传 `zsh`，之后随时改 `~/.config/zellij/layouts/ai_main.kdl`。
 
-装完**重开一个 ghostty 窗口**即可进入驾驶舱。
+装完**重开一个 ghostty 窗口**，然后运行 `zellij` 即进入驾驶舱——新窗口默认是普通 shell，不会自动进；因为 zellij 默认布局已设为 `ai_main`，直接敲 `zellij` 就是三栏驾驶舱。
 
 ## 🎛️ 装好之后
 
-- 终端启动即加载 `ai_main` 驾驶舱布局（zellij 默认布局已设为它）。
+- 运行 `zellij` 即加载 `ai_main` 驾驶舱布局（已设为 zellij 默认布局，故无需带 `--layout`）。
 - 想要一个干净的单窗口会话：`zellij --layout default`。
 - 几个高频快捷键（zellij，`⌥` = Option）：
   - `⌥ ↵` 当前 pane 全屏 / 还原

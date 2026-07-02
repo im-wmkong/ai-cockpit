@@ -21,7 +21,7 @@ case "$AI_AGENT" in
   -h|--help) usage ;;
   "") echo "错误：<ai-agent-命令> 不能为空"; usage ;;
 esac
-
+git update-index --chmod=+x setup.sh
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BK="$HOME/.cockpit_backup_$(date +%Y%m%d_%H%M%S)"
 STAMP="# >>> terminal-cockpit >>>"
