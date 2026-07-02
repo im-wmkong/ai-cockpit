@@ -51,17 +51,51 @@ cd ai-cockpit
 
 - 运行 `zellij` 即加载 `ai_main` 驾驶舱布局（已设为 zellij 默认布局，故无需带 `--layout`）。
 - 想要一个干净的单窗口会话：`zellij --layout default`。
-- 几个高频快捷键（zellij，`⌥` = Option）：
-  - `⌥ ↵` 当前 pane 全屏 / 还原
-  - `⌥ Tab` / `⌥ ⇧ Tab` 循环切换 pane
-  - `⌥ h/j/k/l` 按方向切 pane
-- ghostty `⌘ \`` 唤出/隐藏下拉快捷终端。
+- 快捷键速查见下方 [⌨️ 快捷键](#️-快捷键)。
+
+## ⌨️ 快捷键
+
+macOS 下 ghostty 已设 `macos-option-as-alt`，所以下表的 `⌥`（Option）就是 zellij 的 `Alt` 修饰键。
+
+**ghostty（终端本体）**
+
+| 按键 | 作用 |
+|---|---|
+| `Ctrl ↵` | 唤出 / 隐藏下拉快捷终端（随手记命令，不打断 zellij） |
+
+**zellij · 常用（`normal` 模式直接可用）**
+
+| 按键 | 作用 |
+|---|---|
+| `⌥ h` `⌥ j` `⌥ k` `⌥ l` | 按 左/下/上/右 切换 pane 焦点（也可用方向键 `⌥ ←↓↑→`） |
+| `⌥ Tab` / `⌥ ⇧ Tab` | 循环切换 pane（正向 / 反向） |
+| `⌥ ↵` | 当前 pane 全屏 / 还原 |
+| `⌥ n` | 新建 pane |
+| `⌥ f` | 切换浮动 pane 显隐 |
+| `⌥ +` / `⌥ -` | 增大 / 缩小当前 pane |
+| `⌥ [` / `⌥ ]` | 上一个 / 下一个预设布局 |
+| `Ctrl q` | 退出 zellij |
+
+**zellij · 模式切换（先按进入模式，再按操作键，`Esc` / `↵` 返回 normal）**
+
+| 按键 | 进入模式 | 该模式下典型操作 |
+|---|---|---|
+| `Ctrl p` | pane | `n` 新建、`x` 关闭、`f` 全屏、`d` / `r` 向下 / 向右拆分 |
+| `Ctrl n` | resize | `h/j/k/l` 或 `+` / `-` 调整大小 |
+| `Ctrl t` | tab | `n` 新建、`x` 关闭、`1`–`9` 跳转、`r` 重命名 |
+| `Ctrl s` | scroll | `j` / `k` 滚动、`s` 进入搜索、`Ctrl c` 回到底部 |
+| `Ctrl o` | session | `d` detach（挂起会话）、`w` 会话管理器 |
+| `Ctrl g` | locked | 锁定全部快捷键，避免误触；再按 `Ctrl g` 解锁 |
+
+> 完整键位以 `~/.config/zellij/config.kdl` 为准；zellij 底部状态栏也会实时提示当前模式的可用键。
 
 ## ⚙️ 自定义
 
 - **换 AI agent**：改 `~/.config/zellij/layouts/ai_main.kdl` 左栏的 `command="..."`。
 - **换配色**：各工具配置里搜 `tokyo`/`tokyonight` 替换成你喜欢的主题。
 - **调整分栏**：`ai_main.kdl` 里改各 pane 的 `size="..."`。
+- **改快捷键**：编辑 `~/.config/zellij/config.kdl` 的 `keybinds` 段（本配置用 `clear-defaults=true`，即键位全部自定义，照现有 `bind "..." { ... }` 写法增删即可）。
+- **改下拉终端热键**：编辑 `~/.config/ghostty/config` 里的 `keybind = global:control+enter=toggle_quick_terminal`。
 
 ## 🧩 前置依赖（脚本不代装，需自备）
 
