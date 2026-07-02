@@ -19,7 +19,7 @@
 - **AI 驾驶舱布局** — zellij 单窗口三栏：AI agent（70%）+ yazi 文件树 + lazygit 实时 diff。
 - **AI agent 可插拔** — 用哪个 agent 由你在安装时指定（claude / aider / opencode / 任意命令），项目不锁定。
 - **统一 Tokyo Night 配色** — ghostty、zellij、bat、delta、lazygit、yazi 全部同一套暗色主题。
-- **现代 CLI 工具链** — eza、bat、fd、ripgrep、fzf、zoxide、atuin 一次装齐并接好。
+- **现代 CLI 工具链** — bat、fd、ripgrep、fzf 一次装齐并接好。
 - **一条命令、幂等、安全** — 可重复运行；覆盖前自动备份；对 `.gitconfig` / `.zshrc` 只追加不替换。
 
 ## 📦 包含的工具
@@ -31,11 +31,7 @@
 | [yazi](https://yazi-rs.github.io) | 极速文件管理器 |
 | [lazygit](https://github.com/jesseduffield/lazygit) | Git TUI（diff 用 delta 渲染） |
 | [delta](https://github.com/dandavison/delta) | 更好看的 git diff |
-| [atuin](https://atuin.sh) | 可搜索的 shell 历史 |
-| [zoxide](https://github.com/ajeetdsouza/zoxide) | 智能目录跳转 |
-| [starship](https://starship.rs) | 跨 shell 提示符 |
-| bat · eza · fd · ripgrep · fzf | cat / ls / find / grep 的现代替代 |
-| [VS Code](https://code.visualstudio.com) | yazi 里回车打开文本/代码文件时调用 `code` |
+| bat · fd · ripgrep · fzf | cat / find / grep / 模糊查找的现代工具 |
 
 ## 🚀 安装
 
@@ -84,8 +80,6 @@ cd ai-cockpit
 
 - **驾驶舱左栏 `command not found`**：AI agent 命令还没装，或名字不对。装好即可，或改 `ai_main.kdl` 左栏 `command`（如临时改成 `zsh`）。
 - **图标显示成方块**：字体未生效。确认 ghostty 使用 JetBrainsMono Nerd Font（Brewfile 已含该字体）。
-- **`z` 跳转不准**：zoxide 需要用一段时间积累目录访问记录，属正常现象。
-- **atuin 历史为空**：首次安装是干净的历史库，可选 `atuin login && atuin sync` 走官方同步。
 
 ## 🙏 致谢
 

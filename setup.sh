@@ -67,33 +67,12 @@ c_info "安装 Brewfile 中的包（已装的会跳过）..."
 brew bundle --file="$DIR/Brewfile"
 c_ok "Brewfile 安装完成"
 
-# ---------- 2) oh-my-zsh + 两个自定义插件 ----------
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  c_info "安装 oh-my-zsh（非交互）..."
-  RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  c_ok "oh-my-zsh 已安装"
-else
-  c_ok "oh-my-zsh 已存在"
-fi
-ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
-for p in zsh-autosuggestions zsh-syntax-highlighting; do
-  if [ ! -d "$ZSH_CUSTOM/plugins/$p" ]; then
-    git clone --depth=1 "https://github.com/zsh-users/$p" "$ZSH_CUSTOM/plugins/$p"
-    c_ok "clone 插件 $p"
-  else
-    c_ok "插件 $p 已存在"
-  fi
-done
-
-# ---------- 3) 安装工具配置 ----------
+# ---------- 2) 安装工具配置 ----------
 install_file "$DIR/configs/ghostty-config"      "$HOME/.config/ghostty/config"
 install_file "$DIR/configs/zellij-config.kdl"   "$HOME/.config/zellij/config.kdl"
-install_file "$DIR/configs/atuin-config.toml"   "$HOME/.config/atuin/config.toml"
 install_file "$DIR/configs/bat-config"          "$HOME/.config/bat/config"
 install_file "$DIR/configs/yazi-yazi.toml"      "$HOME/.config/yazi/yazi.toml"
 install_file "$DIR/configs/yazi-theme.toml"     "$HOME/.config/yazi/theme.toml"
-install_file "$DIR/configs/starship.toml"       "$HOME/.config/starship.toml"
 install_file "$DIR/configs/lazygit-config.yml"  "$HOME/Library/Application Support/lazygit/config.yml"
 
 # zellij 布局：把占位符替换成用户指定的 AI agent 命令
@@ -105,7 +84,7 @@ c_ok "安装 ~/.config/zellij/layouts/ai_main.kdl（AI agent = ${AI_AGENT}）"
 command -v "$AI_AGENT" >/dev/null 2>&1 \
   || c_warn "'$AI_AGENT' 当前不在 PATH，zellij 左栏启动时会报 command not found；装好后即可正常使用"
 
-# ---------- 4) 主题资产 ----------
+# ---------- 3) 主题资产 ----------
 install_file "$DIR/assets/bat-themes/tokyonight_night.tmTheme" "$HOME/.config/bat/themes/tokyonight_night.tmTheme"
 install_file "$DIR/assets/delta/tokyonight.gitconfig"          "$HOME/.config/delta/tokyonight.gitconfig"
 
@@ -124,7 +103,7 @@ if command -v ya >/dev/null 2>&1; then
   fi
 fi
 
-# ---------- 5) git delta 配置（只追加需要的键，不动你已有的身份/URL/其它 include）----------
+# ---------- 4) git delta 配置（只追加需要的键，不动你已有的身份/URL/其它 include）----------
 GITCFG="$HOME/.gitconfig"
 if [ -f "$GITCFG" ] && grep -q "path = ~/.config/delta/tokyonight.gitconfig" "$GITCFG" 2>/dev/null; then
   c_ok "git delta 配置已存在，跳过"
@@ -144,7 +123,7 @@ else
     c_warn "别忘了设置 git 身份：git config --global user.name 'xxx'; git config --global user.email 'xxx'"
 fi
 
-# ---------- 6) 追加 zshrc 片段（幂等）----------
+# ---------- 5) 追加 zshrc 片段（幂等）----------
 ZSHRC="$HOME/.zshrc"
 touch "$ZSHRC"
 if grep -qF "$STAMP" "$ZSHRC"; then
@@ -158,12 +137,11 @@ else
     echo "$STAMP_END"
   } >> "$ZSHRC"
   c_ok "已追加驾驶舱片段到 ~/.zshrc"
-  c_warn "确认 ~/.zshrc 的 plugins=(...) 含 zsh-autosuggestions 和 zsh-syntax-highlighting"
 fi
 
 echo
 echo "========== 完成 =========="
-c_ok "重开一个 ghostty 窗口即可生效"
-c_info "zellij 驾驶舱左栏 AI agent = $AI_AGENT"
+c_ok "重开一个 ghostty 窗口让配置生效，然后运行 zellij 进入驾驶舱（默认布局已设为 ai_main）"
+c_info "zellij 驾驶舱左栏 AI agent = ${AI_AGENT}"
 c_info "手动补充项见 README.md（AI agent 本体、git 身份）"
 [ -d "$BK" ] && c_info "被覆盖的旧文件已备份在：$BK"
