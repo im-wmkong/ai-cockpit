@@ -21,7 +21,7 @@ case "$AI_AGENT" in
   -h|--help) usage ;;
   "") echo "错误：<ai-agent-命令> 不能为空"; usage ;;
 esac
-git update-index --chmod=+x setup.sh
+
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BK="$HOME/.cockpit_backup_$(date +%Y%m%d_%H%M%S)"
 STAMP="# >>> terminal-cockpit >>>"
@@ -101,7 +101,7 @@ LAYOUT_DST="$HOME/.config/zellij/layouts/ai_main.kdl"
 mkdir -p "$(dirname "$LAYOUT_DST")"
 backup "$LAYOUT_DST"
 sed "s|__AI_AGENT__|$AI_AGENT|g" "$DIR/configs/zellij-ai_main.kdl" > "$LAYOUT_DST"
-c_ok "安装 ~/.config/zellij/layouts/ai_main.kdl（AI agent = $AI_AGENT）"
+c_ok "安装 ~/.config/zellij/layouts/ai_main.kdl（AI agent = ${AI_AGENT}）"
 command -v "$AI_AGENT" >/dev/null 2>&1 \
   || c_warn "'$AI_AGENT' 当前不在 PATH，zellij 左栏启动时会报 command not found；装好后即可正常使用"
 
