@@ -64,8 +64,20 @@ c_ok "Homebrew 已就绪：$(brew --version | head -1)"
 
 # ---------- 1) 安装 brew 包 ----------
 c_info "安装 Brewfile 中的包（已装的会跳过）..."
-brew bundle --file="$DIR/Brewfile"
-c_ok "Brewfile 安装完成"
+if brew bundle --file="$DIR/Brewfile"; then
+  c_ok "Brewfile 安装完成"
+else
+  # brew bundle 返回非零：用 check 精确列出仍未满足的依赖 = 真正安装失败的包。
+  # 单独放宽这一步的失败（不因 set -e 中断），后续配置安装是幂等且独立的，值得继续。
+  missing="$(brew bundle check --file="$DIR/Brewfile" --verbose 2>/dev/null | grep 'needs to be installed or updated' || true)"
+  if [ -n "$missing" ]; then
+    c_warn "以下包安装未成功（可能已由非 brew 方式安装，如手动拖入 /Applications 的 app，或下载/编译失败）："
+    echo "$missing" | sed 's/^→ /    - /'
+    c_info "可手动检查后重跑本脚本；脚本将继续执行后续配置安装。"
+  else
+    c_ok "Brewfile 依赖均已满足（brew bundle 的非零返回可忽略）"
+  fi
+fi
 
 # ---------- 2) 安装工具配置 ----------
 install_file "$DIR/configs/ghostty-config"      "$HOME/.config/ghostty/config"
