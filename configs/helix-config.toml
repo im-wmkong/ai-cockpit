@@ -1,0 +1,8 @@
+# ~/.config/helix/config.toml
+# Helix 是 yazi 回车编辑文件的默认编辑器。这里只统一配色——
+# tokyonight 是 Helix 内置主题（无需额外装），色值与本套的 bat/delta/zellij 一致。
+theme = "tokyonight"
+
+[editor]
+line-number = "relative"   # 相对行号，配合模态移动更顺手
+true-color = true          # ghostty 支持真彩，让 Tokyo Night 配色准确

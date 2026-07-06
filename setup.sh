@@ -73,6 +73,7 @@ install_file "$DIR/configs/zellij-config.kdl"   "$HOME/.config/zellij/config.kdl
 install_file "$DIR/configs/bat-config"          "$HOME/.config/bat/config"
 install_file "$DIR/configs/yazi-yazi.toml"      "$HOME/.config/yazi/yazi.toml"
 install_file "$DIR/configs/yazi-theme.toml"     "$HOME/.config/yazi/theme.toml"
+install_file "$DIR/configs/helix-config.toml"   "$HOME/.config/helix/config.toml"
 install_file "$DIR/configs/lazygit-config.yml"  "$HOME/Library/Application Support/lazygit/config.yml"
 
 # zellij 布局：把占位符替换成用户指定的 AI agent 命令

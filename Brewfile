@@ -4,6 +4,7 @@
 # 核心工具链
 brew "zellij"      # 终端复用器（驾驶舱）
 brew "yazi"        # 文件管理器
+brew "helix"       # 默认编辑器（yazi 回车编辑，命令为 hx；内置 tokyonight 主题）
 brew "lazygit"     # git TUI
 brew "git-delta"   # git diff 渲染
 brew "bat"         # cat 替代（带主题；delta / yazi 预览语法高亮复用其主题）

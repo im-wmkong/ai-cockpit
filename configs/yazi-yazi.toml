@@ -1,17 +1,19 @@
 # ~/.config/yazi/yazi.toml
-# 仅覆盖默认 opener 的"编辑文本"一项：用终端编辑器 $EDITOR 打开。
+# 仅覆盖默认 opener 的"编辑文本"一项：在 yazi 里回车用 Helix(hx) 打开。
 # 其余行为（图片/视频/音频/归档等）沿用 yazi 内置默认，不在此重复声明。
 # 语法参考 yazi 26.x：run 用 %s 占位选中文件路径，规则用 url/mime 匹配。
 
 [opener]
 edit = [
-  # 用 $EDITOR（未设置则 vi）打开；block=true 让编辑器独占终端，退出后回到 yazi
-  { run = '${EDITOR:-vi} %s', block = true, desc = "$EDITOR" },
+  # 用 Helix 打开。终端编辑器，block=true 让它在 yazi 这一栏就地独占终端，
+  # 退出后自动回到 yazi——这是 GUI 编辑器给不了的"驾驶舱内闭环"。
+  # 想换别的终端编辑器：把 hx 换成 nvim / vi 即可，保持 block=true。
+  { run = 'hx %s', block = true, desc = "Helix" },
 ]
 
 [open]
 prepend_rules = [
-  # 文本/代码类文件回车默认走上面的 edit（$EDITOR）
+  # 文本/代码类文件回车默认走上面的 edit（Helix）
   { mime = "text/*", use = "edit" },
   # JSON 常被识别为 application/json，单独补一条
   { url = "*.json", use = "edit" },
